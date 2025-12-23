@@ -1,0 +1,50 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.env
+
+# --- Distribution / Installer ---
+dist/
+build/
+*.egg-info/
+
+# --- LaTeX (Compilation Artifacts) ---
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.pdf
+!rapport_academique_moderne.pdf
+
+# --- Project Specific (Generated Outputs) ---
+# Results and Plots
+plots/
+plots_long_term/
+plots_test_explanation/
+rl_comparison/
+reports/
+
+# Trained Models (Heavy files)
+models/
+
+# Generated Data
+data/*.npy
+data/*.csv
+
+# --- IDE & OS ---
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
