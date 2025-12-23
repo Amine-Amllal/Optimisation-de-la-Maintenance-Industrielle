@@ -27,14 +27,7 @@ build/
 *.blg
 *.pdf
 !rapport_academique_moderne.pdf
-
-# --- Project Specific (Generated Outputs) ---
-# Results and Plots
-plots/
-plots_long_term/
-plots_test_explanation/
-rl_comparison/
-reports/
+!docs/**/*.pdf
 
 # Trained Models (Heavy files)
 models/
