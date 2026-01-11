@@ -83,5 +83,50 @@ python generate_comparison_plots.py
 ```
 
 ---
+
+## 🖼️ Ressources Visuelles pour Présentation
+
+### Graphiques Disponibles
+
+| Fichier | Chemin | Description |
+|---------|--------|-------------|
+| Radar Performance | `plots/comparison/radar_performance.png` | Vue globale multi-critères des 4 stratégies |
+| Coûts Moyens | `plots/comparison/cout_moyen.png` | Histogramme comparatif des coûts (€) |
+| Taux de Panne | `plots/comparison/taux_panne.png` | Histogramme des taux de panne (%) |
+| Utilisation RUL | `plots/comparison/utilisation_rul.png` | Histogramme d'efficacité d'utilisation (%) |
+| Évolution RUL | `plots/comparison/evolution_rul.png` | Courbes temporelles avec points de maintenance |
+| Tableau Récapitulatif | `plots/comparison/tableau_recapitulatif.png` | Résumé visuel avec médailles 🥇🥈🥉 |
+
+### Documents
+
+| Fichier | Chemin | Description |
+|---------|--------|-------------|
+| Rapport Technique | `docs/RapportTechnique.pdf` | Rapport académique complet |
+| Rapport HTML | `reports/rapport_comparatif.html` | Rapport interactif généré |
+
+### Accès Rapide aux Ressources
+
+```powershell
+# Ouvrir le dossier des graphiques
+explorer "plots\comparison"
+
+# Ouvrir le dossier des documents
+explorer "docs"
+```
+
+---
+
+## 🛠️ Stack Technologique
+
+- **Python 3.10+**
+- **Gymnasium** - Environnement de simulation RL
+- **Stable Baselines 3** - Implémentation PPO/DQN
+- **Streamlit** - Interface web interactive
+- **Plotly** - Visualisations interactives
+- **Matplotlib** - Graphiques statiques
+- **Pandas/NumPy** - Manipulation de données
+
+---
+
 **Auteur :** Amine AMLLAL  
 **Encadrant :** M. Tawfik MASROUR
