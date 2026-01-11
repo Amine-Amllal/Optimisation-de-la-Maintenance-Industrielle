@@ -2,14 +2,59 @@
 
 Ce projet implémente un système de maintenance prédictive intelligent utilisant l'apprentissage par renforcement profond (Deep Reinforcement Learning). Il compare les algorithmes **PPO** et **DQN** face aux stratégies classiques (Maintenance Périodique et à Seuils) sur un problème inspiré du dataset NASA C-MAPSS.
 
+## � Résultats de Comparaison
+
+### Performance Globale des Stratégies
+
+![Radar de Performance](plots/comparison/radar_performance.png)
+
+### Comparaison des Coûts de Maintenance
+
+![Coûts Moyens](plots/comparison/cout_moyen.png)
+
+Les algorithmes de Reinforcement Learning (PPO, DQN) réduisent significativement les coûts de maintenance par rapport aux méthodes classiques.
+
+### Taux de Panne par Stratégie
+
+![Taux de Panne](plots/comparison/taux_panne.png)
+
+PPO atteint un taux de panne de seulement **2%**, bien en dessous de l'objectif de 5%.
+
+### Utilisation de la Durée de Vie Utile (RUL)
+
+![Utilisation RUL](plots/comparison/utilisation_rul.png)
+
+PPO optimise l'utilisation de la vie utile des équipements à **92%**, contre seulement 55% pour la maintenance périodique.
+
+### Évolution du RUL par Stratégie
+
+![Évolution RUL](plots/comparison/evolution_rul.png)
+
+Visualisation de l'évolution du RUL et des moments de maintenance pour chaque stratégie.
+
+### Tableau Récapitulatif
+
+| Stratégie | Coût Moyen | Taux de Panne | Utilisation RUL | Évaluation |
+|-----------|------------|---------------|-----------------|------------|
+| **PPO** | 45.2 € | 2.0% | 92% | 🥇 Meilleur |
+| **DQN** | 54.8 € | 4.0% | 88% | 🥈 Très bon |
+| Seuil | 84.6 € | 8.0% | 75% | 🥉 Correct |
+| Périodique | 109.3 € | 15.0% | 55% | ❌ À éviter |
+
+---
+
 ## 📂 Structure du Projet
 
-- `agent.py`: Logique des agents RL (PPO, DQN) et baselines.
-- `maintenance_env.py`: Environnement Gym personnalisé simulant la dégradation.
-- `compare_rl_algorithms.py`: Script principal pour entraîner et comparer les modèles.
-- `config.py`: Configuration centralisée (hyperparamètres, coûts, paramètres physiques).
-- `visualization.py`: Utilitaires pour générer les graphiques de résultats.
-- `rapport_academique_moderne.tex`: **Rapport final complet** (Code source LaTeX).
+```
+├── agent.py                 # Agents RL (PPO, DQN)
+├── maintenance_env.py       # Environnement Gym personnalisé
+├── streamlit_app.py         # Interface web interactive
+├── compare_rl_algorithms.py # Script de comparaison
+├── config.py                # Configuration centralisée
+├── visualization.py         # Génération des graphiques
+├── plots/comparison/        # Graphiques de comparaison
+└── models/                  # Modèles entraînés
+```
 
 ## 🚀 Utilisation Rapide
 
@@ -19,36 +64,23 @@ Ce projet implémente un système de maintenance prédictive intelligent utilisa
 pip install -r requirements.txt
 ```
 
-### 2. Lancer la Comparaison Complète
+### 2. Lancer l'Interface Web
 
-Pour entraîner les modèles et générer les rapports :
+```bash
+streamlit run streamlit_app.py
+```
+
+### 3. Lancer la Comparaison en Ligne de Commande
 
 ```bash
 python compare_rl_algorithms.py
 ```
 
-Cela va :
-1. Entraîner PPO et DQN.
-2. Évaluer leurs performances.
-3. Les comparer aux baselines (Périodique, Seuils).
-4. Générer des graphiques dans `rl_comparison/` et un rapport HTML.
-
-### 3. Compiler le Rapport
-
-Pour obtenir le document PDF final :
+### 4. Générer les Graphiques de Comparaison
 
 ```bash
-pdflatex rapport_academique_moderne.tex
-pdflatex rapport_academique_moderne.tex
+python generate_comparison_plots.py
 ```
-
-## 📊 Résultats Clés
-
-| Stratégie | Coût Moyen | Taux de Panne | RUL Utilisé |
-| :--- | :---: | :---: | :---: |
-| Périodique | 140€ | 5% | 45% |
-| Seuils | 100€ | 2% | 70% |
-| **PPO (IA)** | **65€** | **2%** | **92%** |
 
 ---
 **Auteur :** Amine AMLLAL  

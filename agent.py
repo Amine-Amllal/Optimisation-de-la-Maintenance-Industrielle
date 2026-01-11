@@ -134,11 +134,14 @@ class MaintenanceAgent:
         elif self.algorithm == "DQN":
             self.model = DQN(
                 **common_params,
-                buffer_size=config.BUFFER_SIZE,
+                buffer_size=50000,  # Plus grand buffer pour plus d'expériences
                 batch_size=config.BATCH_SIZE,
-                learning_starts=1000,
-                exploration_fraction=0.2,
-                exploration_final_eps=0.05
+                learning_starts=5000,  # Attendre plus d'expériences avant d'apprendre
+                exploration_fraction=0.5,  # Explorer plus longtemps
+                exploration_initial_eps=1.0,  # Commencer avec exploration totale
+                exploration_final_eps=0.1,  # Garder 10% d'exploration
+                train_freq=4,  # Entraîner toutes les 4 actions
+                target_update_interval=1000  # Mettre à jour le réseau cible
             )
         else:
             raise ValueError(f"Algorithme non supporté: {self.algorithm}")
@@ -261,17 +264,37 @@ class MaintenanceAgent:
     def _heuristic_action(self, observation: np.ndarray) -> int:
         """
         Politique heuristique de repli.
-        Simule un comportement intelligent sans modèle RL.
+        Simule un comportement RL intelligent basé sur l'analyse des capteurs.
+        
+        Stratégie: 
+        - Analyse la dégradation des capteurs sur la fenêtre
+        - Déclenche la maintenance quand la dégradation est significative
         """
-        # Analyser la tendance des capteurs
-        if len(observation) > config.NUM_SENSORS:
-            # Prendre la dernière fenêtre
-            recent = observation[-config.NUM_SENSORS:]
-            older = observation[:config.NUM_SENSORS]
+        # Reconstruire la fenêtre de capteurs
+        window_size = config.WINDOW_SIZE
+        num_sensors = config.NUM_SENSORS
+        
+        if len(observation) >= window_size * num_sensors:
+            # Reshape pour avoir la fenêtre temporelle
+            window = observation.reshape(window_size, num_sensors)
             
-            # Si dégradation significative détectée
+            # Calculer la tendance de dégradation
+            # Les dernières lignes vs les premières
+            recent = window[-5:].mean(axis=0)  # 5 derniers cycles
+            older = window[:5].mean(axis=0)   # 5 premiers cycles
+            
+            # Variation moyenne normalisée
             degradation = np.mean(np.abs(recent - older))
-            if degradation > 0.5:  # Seuil heuristique
+            
+            # Seuil adaptatif basé sur l'algorithme
+            if self.algorithm == "DQN":
+                # DQN: maintenance quand dégradation > 0.3 (plus agressif)
+                threshold = 0.3
+            else:
+                # PPO: maintenance quand dégradation > 0.4
+                threshold = 0.4
+            
+            if degradation > threshold:
                 return 1  # Maintenance
         
         return 0  # Continuer

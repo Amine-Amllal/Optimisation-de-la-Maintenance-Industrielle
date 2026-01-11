@@ -1,0 +1,87 @@
+# Streamlit Predictive Maintenance Dashboard - Progress Log
+
+## Project Status: COMPLETED
+Last Updated: 2026-01-11
+
+## Implementation Summary
+
+### Files Created
+1. `streamlit_app.py` - Main Streamlit application (complete)
+
+### Files Modified
+1. `requirements.txt` - Added streamlit and plotly dependencies
+
+### Features Implemented
+
+#### Core Functionality
+- [x] Dataset upload with CSV validation
+- [x] Built-in C-MAPSS data support
+- [x] PPO model loading and evaluation
+- [x] DQN model loading and evaluation
+- [x] Threshold-based maintenance baseline
+- [x] Periodic maintenance baseline
+- [x] 3-way comparison (1 RL model + 2 baselines)
+- [x] 4-way comparison (2 RL models + 2 baselines)
+
+#### UI/UX Features
+- [x] Dark mode theme with cohesive styling
+- [x] Inter + JetBrains Mono typography
+- [x] Gradient hero section
+- [x] Metric cards with color-coded borders
+- [x] Status badges for model availability
+- [x] Responsive layout
+
+#### Visualizations (Plotly)
+- [x] Cost comparison bar chart with error bars
+- [x] Cumulative reward curves
+- [x] Multi-metric radar chart
+- [x] Failure analysis dual bar chart
+- [x] Cost savings analysis metrics
+
+#### Data Management
+- [x] Session state for model caching
+- [x] @st.cache_resource for model loading
+- [x] results.json logging
+- [x] CSV upload validation
+
+### Architecture Notes
+
+The Streamlit app imports directly from existing modules:
+- `agent.py`: MaintenanceAgent class (PPO/DQN)
+- `maintenance_env.py`: PredictiveMaintenanceEnv
+- `config.py`: All hyperparameters
+- `demo_mock.py`: StrategyResult dataclass
+
+Model loading uses @st.cache_resource to prevent re-initialization:
+```python
+@st.cache_resource
+def load_pretrained_model(algorithm: str, model_path: Optional[str] = None):
+    agent = MaintenanceAgent(algorithm=algorithm, seed=config.RANDOM_SEED)
+    if model_path:
+        agent.load(model_path)
+    return agent
+```
+
+### How to Run
+
+```bash
+cd Planificateur_de_maintenance_predictif
+pip install -r requirements.txt
+streamlit run streamlit_app.py
+```
+
+### Pre-trained Models Location
+- `rl_comparison/models/ppo_model.zip`
+- `rl_comparison/models/dqn_model.zip`
+
+### Known Considerations
+- If stable-baselines3 is not installed, training features are disabled
+- The app gracefully falls back to demo mode when models aren't available
+- Custom dataset upload requires specific column naming conventions
+
+## Session Recovery Notes
+To resume development if interrupted:
+1. Check this progress.txt for completed tasks
+2. Run `git log --oneline -10` to see recent commits
+3. Review results.json for previous comparison runs
+4. The Streamlit app maintains session state across refreshes
