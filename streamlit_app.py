@@ -1440,7 +1440,9 @@ def render_sidebar():
                         st.session_state.data_validated = False
                 
                 # Afficher les exigences du format (sans expander imbriqué)
-                st.caption("📋 **Format requis:** CSV avec colonnes `cycle`, `capteur_1`, `capteur_2`, ...")
+                st.caption(
+                    "📋 **Format requis:** CSV (UTF-8) avec une colonne temporelle (`cycle`/`timestamp`) et ≥3 colonnes capteurs numériques (`capteur_1`, `capteur_2`, ...). Pas de valeurs manquantes; colonne `panne`/`failure_event` (0/1) optionnelle."
+                )
             else:
                 st.success("✅ Données C-MAPSS chargées (NASA Turbofan)")
                 st.session_state.custom_seed = None

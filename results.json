@@ -553,6 +553,44 @@
           "rul_utilization": 0.55
         }
       }
+    },
+    {
+      "timestamp": "2026-01-11T21:13:34.418057",
+      "run_id": 16,
+      "strategies": {
+        "PPO": {
+          "mean_cost": 43.96000367537662,
+          "std_cost": 7.470643500333811,
+          "mean_reward": -43.89721866923015,
+          "failure_rate": 0.029780230269512,
+          "maintenance_count": 3.8297268361068353,
+          "rul_utilization": 0.9068868381173039
+        },
+        "DQN": {
+          "mean_cost": 53.382225246012446,
+          "std_cost": 5.79252727680068,
+          "mean_reward": -53.086922103842305,
+          "failure_rate": 0.04567664701611501,
+          "maintenance_count": 4.080900223631638,
+          "rul_utilization": 0.8649425854909449
+        },
+        "Seuil": {
+          "mean_cost": 84.77341605531117,
+          "std_cost": 8.896003308490581,
+          "mean_reward": -83.98022091315254,
+          "failure_rate": 0.08,
+          "maintenance_count": 4.513986876115773,
+          "rul_utilization": 0.75
+        },
+        "P\u00e9riodique": {
+          "mean_cost": 109.57510792600691,
+          "std_cost": 14.186295257146947,
+          "mean_reward": -108.4852305171907,
+          "failure_rate": 0.15,
+          "maintenance_count": 5.157845175795059,
+          "rul_utilization": 0.55
+        }
+      }
     }
   ]
 }
